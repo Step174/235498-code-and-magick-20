@@ -1,8 +1,8 @@
 var fireballSize = 22;
 
    function getFireballSpeed (isHeadWind) {
-    if (!isHeadWind) {
-      return 5;
+    if (isHeadWind) {
+      return isHeadWind ? 5 : 2;
     }
 
     return 2;
