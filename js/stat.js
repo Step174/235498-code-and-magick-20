@@ -19,6 +19,7 @@ var drawRect = function (ctx, x, y, width, height, color) {
 };
 
 var drawText = function (ctx, text, x, y, font, color) {
+  font = font || '16px PT Mono';
   ctx.fillStyle = color || '#000000';
   ctx.fillText(text, x, y);
 };
@@ -43,15 +44,14 @@ var getRandomBlue = function () {
 window.renderStatistics = function (ctx, players, times) {
   drawRect(ctx, Cloud.X + GAP, Cloud.Y + GAP, Cloud.WIDTH, Cloud.HEIGHT, 'rgba(0, 0, 0, 0.7)');
   drawRect(ctx, Cloud.X, Cloud.Y, Cloud.WIDTH, Cloud.HEIGHT, '#ffffff');
+  drawText(ctx, 'Ура вы победили!', Cloud.X + GAP * 5, Cloud.Y + GAP * 2);
+  drawText(ctx, 'Список результатов:', Cloud.X + GAP * 5, Cloud.Y + FONT_GAP + GAP * 3);
 
   ctx.fillStyle = '#000';
 
   var maxTime = getMaxTime(times);
 
   for (var i = 0; i < players.length; i++) {
-    ctx.fillStyle = '#000000';
-    drawText(ctx, 'Ура вы победили!', Cloud.X + GAP * 5, Cloud.Y + GAP * 2);
-    drawText(ctx, 'Список результатов:', Cloud.X + GAP * 5, Cloud.Y + FONT_GAP + GAP * 3);
     drawText(ctx, Math.trunc(times[i]), Cloud.X + GAP + FONT_GAP + (BAR_WIDTH + TEXT_WIDTH) * i, Cloud.HEIGHT - (3 * GAP) - (barHeight * times[i]) / maxTime);
     drawText(ctx, players[i], Cloud.X + GAP + FONT_GAP + (BAR_WIDTH + TEXT_WIDTH) * i, Cloud.HEIGHT);
     drawRect(ctx, Cloud.X + GAP + FONT_GAP + (BAR_WIDTH + TEXT_WIDTH) * i, Cloud.HEIGHT - 20, BAR_WIDTH, -(barHeight * times[i]) / maxTime, players[i] === 'Вы' ? 'rgba(255, 0, 0, 1)' : getRandomBlue());
