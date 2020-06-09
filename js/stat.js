@@ -11,7 +11,10 @@ var GAP = 10;
 var FONT_GAP = 15;
 var TEXT_WIDTH = 50;
 var BAR_WIDTH = 35;
+var INDENT = 125;
+
 var barHeight = 150;
+var widthIter = BAR_WIDTH + TEXT_WIDTH;
 
 var drawRect = function (ctx, x, y, width, height, color) {
   ctx.fillStyle = color || '#000000';
@@ -52,8 +55,8 @@ window.renderStatistics = function (ctx, players, times) {
   var maxTime = getMaxTime(times);
 
   for (var i = 0; i < players.length; i++) {
-    drawText(ctx, Math.trunc(times[i]), Cloud.X + GAP + FONT_GAP + (BAR_WIDTH + TEXT_WIDTH) * i, Cloud.HEIGHT - (3 * GAP) - (barHeight * times[i]) / maxTime);
-    drawText(ctx, players[i], Cloud.X + GAP + FONT_GAP + (BAR_WIDTH + TEXT_WIDTH) * i, Cloud.HEIGHT);
-    drawRect(ctx, Cloud.X + GAP + FONT_GAP + (BAR_WIDTH + TEXT_WIDTH) * i, Cloud.HEIGHT - 20, BAR_WIDTH, -(barHeight * times[i]) / maxTime, players[i] === 'Вы' ? 'rgba(255, 0, 0, 1)' : getRandomBlue());
+    drawText(ctx, Math.trunc(times[i]), INDENT + widthIter * i, Cloud.HEIGHT - (3 * GAP) - (barHeight * times[i]) / maxTime);
+    drawText(ctx, players[i], INDENT + widthIter * i, Cloud.HEIGHT);
+    drawRect(ctx, INDENT + widthIter * i, Cloud.HEIGHT - 20, BAR_WIDTH, -(barHeight * times[i]) / maxTime, players[i] === 'Вы' ? 'rgba(255, 0, 0, 1)' : getRandomBlue());
   }
 };
